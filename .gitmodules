@@ -16,3 +16,6 @@
 [submodule "OpenXR-Hpp"]
 	path = OpenXR-Hpp
 	url = https://github.com/KhronosGroup/OpenXR-Hpp.git
+[submodule "SDL"]
+	path = SDL
+	url = https://github.com/libsdl-org/SDL.git

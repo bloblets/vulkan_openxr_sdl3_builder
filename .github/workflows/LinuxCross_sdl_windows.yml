@@ -1,0 +1,65 @@
+name: win64_sdl_builder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: dockcross/windows-shared-x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive 
+          fetch-depth: 1 
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            pkg-config \
+            cmake \
+            ninja-build \
+            gnome-desktop-testing \
+            libasound2-dev \
+            libpulse-dev \
+            libaudio-dev \
+            libjack-dev \
+            libsndio-dev \
+            libx11-dev \
+            libxext-dev \
+            libxrandr-dev \
+            libxcursor-dev \
+            libxfixes-dev \
+            libxi-dev \
+            libxss-dev \
+            libxtst-dev \
+            libxkbcommon-dev \
+            libdrm-dev \
+            libgbm-dev \
+            libgl1-mesa-dev \
+            libgles2-mesa-dev \
+            libegl1-mesa-dev \
+            libdbus-1-dev \
+            libibus-1.0-dev \
+            libudev-dev
+
+      - name: Building sdl 
+        working-directory: ./SDL
+        run: |
+          ls
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Openxr_loader_mingW_win64
+          path: |
+              SDL/build/*.so*
+              SDL/build/*.dll*
+              SDL/build/*.pc
+              SDL/build/*.dll.a
+              SDL/build/*.a*
