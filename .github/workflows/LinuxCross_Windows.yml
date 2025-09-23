@@ -9,7 +9,7 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     container:
-      image: dockcross/windows-static-x64
+      image: dockcross/windows-shared-x64
     steps:
       - name: Checkout
         uses: actions/checkout@v3
