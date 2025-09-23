@@ -1,9 +1,7 @@
 name: win64_vulkan_loader_builder
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   build-linux:
