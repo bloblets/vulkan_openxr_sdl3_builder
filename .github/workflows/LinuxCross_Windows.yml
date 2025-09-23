@@ -27,8 +27,7 @@ jobs:
           cmake --build build
 
       - name: Archive artifacts
-        working-directory: ./Vulkan-Loader
         uses: actions/upload-artifact@v4
         with:
           name: Vulkan_loader_mingW_win64
-          path: build/
+          path: Vulkan-Loader/build/
