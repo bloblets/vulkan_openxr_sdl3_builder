@@ -1,0 +1,51 @@
+name: win64_vulkan_loader_builder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: dockcross/windows-shared-x64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive 
+          fetch-depth: 1 # fetch submodules
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            libgl1-mesa-dev \
+            libvulkan-dev \
+            libx11-xcb-dev \
+            libxcb-dri2-0-dev \
+            libxcb-glx0-dev \
+            libxcb-icccm4-dev \
+            libxcb-keysyms1-dev \
+            libxcb-randr0-dev \
+            libxrandr-dev \
+            libxxf86vm-dev \
+            mesa-common-dev
+
+      - name: Building openxr loader
+        working-directory: ./OpenXR-SDK
+        run: |
+          ls
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+          ls ./build/src/loader/
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Openxr_loader_mingW_win64
+          path: |
+              OpenXR-SDK/build/src/loader/*.so*
+              OpenXR-SDK/build/src/loader/*.dll*
+              OpenXR-SDK/build/src/loader/*.pc
+              OpenXR-SDK/build/src/loader/*.dll.a
