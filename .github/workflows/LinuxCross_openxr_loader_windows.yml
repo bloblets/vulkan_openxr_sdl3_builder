@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive 
-          fetch-depth: 1 # fetch submodules
+          fetch-depth: 1 
 
       - name: Install dependencies
         run: |
@@ -36,7 +36,7 @@ jobs:
         working-directory: ./OpenXR-SDK
         run: |
           ls
-          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake -S . -B build -DDYNAMIC_LOADER=ON -DCMAKE_BUILD_TYPE=Release
           cmake --build build
           ls ./build/src/loader/
 
