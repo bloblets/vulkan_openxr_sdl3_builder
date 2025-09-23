@@ -1,4 +1,4 @@
-name: win64_vulkan_loader_builder
+name: win64_operxr_loader_builder
 
 on:
   workflow_dispatch:
