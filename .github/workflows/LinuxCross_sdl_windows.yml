@@ -56,7 +56,7 @@ jobs:
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Openxr_loader_mingW_win64
+          name: sdl_mingW_win64
           path: |
               SDL/build/*.so*
               SDL/build/*.dll*
