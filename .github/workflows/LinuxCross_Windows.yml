@@ -32,7 +32,7 @@ jobs:
         with:
           name: Vulkan_loader_mingW_win64
           path: |
-            Vulkan-Loader/build/*.so
-            Vulkan-Loader/build/*.dll
-            Vulkan-Loader/build/*.pc
-            Vulkan-Loader/build/*.dll.a
+            Vulkan-Loader/build/loader/*.so
+            Vulkan-Loader/build/loader/*.dll
+            Vulkan-Loader/build/loader/*.pc
+            Vulkan-Loader/build/loader/*.dll.a
