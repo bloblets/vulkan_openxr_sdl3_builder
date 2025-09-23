@@ -1,0 +1,18 @@
+[submodule "Vulkan-Loader"]
+	path = Vulkan-Loader
+	url = https://github.com/KhronosGroup/Vulkan-Loader.git
+[submodule "Vulkan-Headers"]
+	path = Vulkan-Headers
+	url = https://github.com/KhronosGroup/Vulkan-Headers.git
+[submodule "Vulkan-Hpp"]
+	path = Vulkan-Hpp
+	url = https://github.com/KhronosGroup/Vulkan-Hpp.git
+[submodule "OpenXR-SDK"]
+	path = OpenXR-SDK
+	url = https://github.com/KhronosGroup/OpenXR-SDK.git
+[submodule "OpenXR-SDK-Source"]
+	path = OpenXR-SDK-Source
+	url = https://github.com/KhronosGroup/OpenXR-SDK-Source.git
+[submodule "OpenXR-Hpp"]
+	path = OpenXR-Hpp
+	url = https://github.com/KhronosGroup/OpenXR-Hpp.git
