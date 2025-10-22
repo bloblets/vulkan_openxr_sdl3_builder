@@ -45,7 +45,8 @@ jobs:
           draft: false
           prerelease: false
           body: "Release of Vulkan Loader built for Windows x64 using dockcross"
-
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
         with:
