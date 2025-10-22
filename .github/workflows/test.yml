@@ -1,0 +1,55 @@
+name: win64_vulkan_loader_builder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: dockcross/windows-shared-x64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive 
+          fetch-depth: 1 
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y build-essential cmake git python3 python3-pip
+
+      - name: Build Vulkan Headers & Loader
+        working-directory: ./Vulkan-Loader
+        run: |
+          ls
+          cmake -S . -B build -D UPDATE_DEPS=On -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+
+      - name: Prepare artifacts
+        run: |
+          mkdir -p release_artifacts
+          cp Vulkan-Loader/build/loader/*.dll release_artifacts/ || true
+          cp Vulkan-Loader/build/loader/*.dll.a release_artifacts/ || true
+          cp Vulkan-Loader/build/loader/*.so release_artifacts/ || true
+          cp Vulkan-Loader/build/loader/*.pc release_artifacts/ || true
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v1.0.0
+          release_name: Vulkan Loader Windows x64
+          draft: false
+          prerelease: false
+          body: "Release of Vulkan Loader built for Windows x64 using dockcross"
+
+      - name: Upload Release Assets
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: release_artifacts
+          asset_name: win64_vulkan_loader.zip
+          asset_content_type: application/zip
