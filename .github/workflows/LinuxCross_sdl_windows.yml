@@ -63,3 +63,4 @@ jobs:
               SDL/build/*.pc
               SDL/build/*.dll.a
               SDL/build/*.a*
+              SDL/include
